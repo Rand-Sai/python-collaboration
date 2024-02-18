@@ -1,0 +1,1 @@
+We are to practice using GitHub repository through this simple project, where we are asked to set up the repository, set up a program, and familrize ourselves with version control. Collaboration is also a key to this project.
