@@ -60,6 +60,7 @@ def delete(data_dict):
 
 # Main Program
 def main():
+    print("Hello! \n")
     print("Welcome to the Task Program. \n")
 
     while 1:
