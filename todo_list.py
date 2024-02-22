@@ -58,13 +58,44 @@ def delete(data_dict):
         else:
             print("The task you enter does not exist. Please enter the full name of the task. \n")
 
+#Sort Tasks
+def sort_tasks(data_dict):
+    print("How would you like to sort the tasks?\n")
+    print("(1) By Name")
+    print("(2) By Status")
+    sort_by = input("Choose an option (1 or 2): ")
+
+    if sort_by == "1":
+        # Sort by task name
+        sorted_by_name = sorted(data_dict.items(), key=lambda x: x[0].lower())
+        print("Tasks sorted by Name:")
+    elif sort_by == "2":
+        # Sort by status
+        sorted_by_name = sorted(data_dict.items(), key=lambda x: (x[1][1] != "Incomplete", x[0].lower()))
+        print("Tasks sorted by Status (Incomplete first):")
+    else:
+        print("Invalid option. Returning to main menu.")
+        return
+
+    for task, details in sorted_by_name:
+        print(f"{task}: Description: {details[0]}, Status: {details[1]}")
+
+
+# Save Tasks
+def save_to_file(data_dict):
+    file_name = input("Enter the filename to save tasks (e.g., tasks.txt): \n")
+    with open(file_name, 'w') as file:
+        for task_name, (description, status) in data_dict.items():
+            file.write(f"{task_name}|{description}|{status}\n")
+    print(f"Tasks saved to {file_name}")
+
 # Main Program
 def main():
     print("Hello! \n")
     print("Welcome to the Task Program. \n")
 
     while 1:
-        print("Select action: Add Task(1) | View Task(2) | Mark as Complete(3) | Delete Task(4) | Exit Program(5) \n")
+        print("Select action: Add Task(1) | View Task(2) | Mark as Complete(3) | Delete Task(4) | Sort Task(5) | Save Task(6) | Exit(7) \n")
         choice = (input("Enter the number corresponding to the action you want to take: \n"))
         if choice == "1":
             add(task_dict)
@@ -75,6 +106,10 @@ def main():
         elif choice == "4":
             delete(task_dict)
         elif choice == "5":
+            sort_tasks(task_dict)
+        elif choice == "6":
+            save_to_file(task_dict)
+        elif choice == "7":
             print("Exitng program... \n")
             break
         else:
